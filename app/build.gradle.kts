@@ -26,20 +26,14 @@ android {
             this.keyAlias = localKeyAlias
             this.keyPassword = localKeyPassword
         }
-        getByName("debug") {
-            this.storeFile = file(localStoreFile)
-            this.storePassword = localStorePassword
-            this.keyAlias = localKeyAlias
-            this.keyPassword = localKeyPassword
-        }
     }
 
     defaultConfig {
         applicationId = "wifi.auto.hotspot.wifi.control.provider.content"
         minSdk = 26
         targetSdk = 28
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 5
+        versionName = "1.1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -54,9 +48,6 @@ android {
             isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        debug {
-            signingConfig = signingConfigs.getByName("release")
         }
     }
 
