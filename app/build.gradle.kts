@@ -17,7 +17,7 @@ val localKeyPassword: String = localProperties.getProperty("keyPassword")
 
 android {
     namespace = "wifi.control"
-    compileSdk = 34
+    compileSdk = 28
 
     signingConfigs {
         create("release") {
@@ -30,15 +30,10 @@ android {
 
     defaultConfig {
         applicationId = "wifi.auto.hotspot.wifi.control.provider.content"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 28
         versionCode = 5
         versionName = "1.1.3"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     lint.abortOnError = false
