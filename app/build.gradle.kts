@@ -17,6 +17,7 @@ val localKeyPassword: String = localProperties.getProperty("keyPassword")
 
 android {
     namespace = "wifi.control"
+    //noinspection GradleDependency - we need to support older devices
     compileSdk = 28
 
     signingConfigs {
@@ -31,6 +32,7 @@ android {
     defaultConfig {
         applicationId = "wifi.auto.hotspot.wifi.control.provider.content"
         minSdk = 24
+        //noinspection ExpiredTargetSdkVersion - we need to support older devices
         targetSdk = 28
         versionCode = 5
         versionName = "1.1.3"
