@@ -7,7 +7,7 @@ plugins {
 }
 
 val localProperties = Properties().apply {
-    FileInputStream(rootProject.file("local.properties")).use { load(it) }
+    FileInputStream(rootProject.file("../signing.properties")).use { load(it) }
 }
 
 val localStoreFile: String = localProperties.getProperty("storeFile")
