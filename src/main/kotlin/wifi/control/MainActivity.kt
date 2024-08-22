@@ -24,7 +24,7 @@ class MainActivity : Activity() {
             contentResolver.delete(CONTENT_URI, null, null)
         }
 
-        val build = CONTENT_URI.buildUpon().appendPath("version").build()
+        val build = CONTENT_URI.buildUpon().appendPath(PATH_VERSION).build()
         val versionCursor: Cursor? = contentResolver.query(
             build,
             null,
@@ -34,8 +34,8 @@ class MainActivity : Activity() {
         )
         appVersion.text = versionCursor?.let {
             it.moveToFirst()
-            val versionCode = it.getInt(it.getColumnIndex("version_code"))
-            val versionName = it.getString(it.getColumnIndex("version_name"))
+            val versionCode = it.getInt(it.getColumnIndex(COLUM_VERSION_CODE))
+            val versionName = it.getString(it.getColumnIndex(COLUM_VERSION_NAME))
             "Version: $versionName ($versionCode)"
         } ?: "Version: unknown"
         versionCursor?.close()

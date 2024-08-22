@@ -11,6 +11,10 @@ import android.os.Build
 
 val CONTENT_URI: Uri = Uri.parse("content://com.wifi.auto.hotspot.wifi.control.provider")
 
+const val COLUM_VERSION_CODE = "version_code"
+const val COLUM_VERSION_NAME = "version_name"
+const val PATH_VERSION = "version"
+
 class WifiControlProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
@@ -24,7 +28,7 @@ class WifiControlProvider : ContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?,
     ): Cursor {
-        if (uri == CONTENT_URI.buildUpon().appendPath("version").build()) {
+        if (uri == CONTENT_URI.buildUpon().appendPath(PATH_VERSION).build()) {
             val versionCode = getAppVersionCode(context!!)
             val versionName = getAppVersionName(context!!)
             val cursor = MatrixCursor(arrayOf("version_code", "version_name"))
