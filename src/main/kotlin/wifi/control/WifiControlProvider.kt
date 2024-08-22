@@ -4,8 +4,10 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.database.MatrixCursor
 import android.net.Uri
 import android.net.wifi.WifiManager
+import android.os.Build
 
 val CONTENT_URI: Uri = Uri.parse("content://com.wifi.auto.hotspot.wifi.control.provider")
 
@@ -16,9 +18,19 @@ class WifiControlProvider : ContentProvider() {
     }
 
     override fun query(
-        uri: Uri, projection: Array<String>?, selection: String?,
-        selectionArgs: Array<String>?, sortOrder: String?,
-    ): Cursor? {
+        uri: Uri,
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortOrder: String?,
+    ): Cursor {
+        if (uri == CONTENT_URI.buildUpon().appendPath("version").build()) {
+            val versionCode = getAppVersionCode(context!!)
+            val versionName = getAppVersionName(context!!)
+            val cursor = MatrixCursor(arrayOf("version_code", "version_name"))
+            cursor.addRow(arrayOf(versionCode, versionName))
+            return cursor
+        }
         throw UnsupportedOperationException("Not yet implemented")
     }
 
@@ -27,7 +39,9 @@ class WifiControlProvider : ContentProvider() {
     }
 
     override fun update(
-        uri: Uri, values: ContentValues?, selection: String?,
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
         selectionArgs: Array<String>?,
     ): Int {
         val wifiManager = context?.applicationContext?.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -43,5 +57,19 @@ class WifiControlProvider : ContentProvider() {
 
     override fun getType(uri: Uri): String? {
         throw UnsupportedOperationException("Not yet implemented")
+    }
+
+    private fun getAppVersionCode(context: Context): Long {
+        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            packageInfo.longVersionCode
+        } else {
+            packageInfo.versionCode.toLong()
+        }
+    }
+
+    private fun getAppVersionName(context: Context): String {
+        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        return packageInfo.versionName
     }
 }
