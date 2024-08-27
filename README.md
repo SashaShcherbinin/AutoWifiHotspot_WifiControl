@@ -1,7 +1,6 @@
 # How to install
 
 1. Download the latest APK from the [WiFiControl.1.1.3.apk](https://github.com/SashaShcherbinin/WifiAutoHotspot_WifiControl/releases/download/1.1.3/WiFiControl.1.1.3.apk)
-<img src="docks/img1.jpg" style="width:300px;"/>
 2. Open it in you android phone
 <img src="docks/img2.jpg" style="width:300px;"/>
 3. You’ll receive a warning letting you know that you must give that app permission to install the file.
